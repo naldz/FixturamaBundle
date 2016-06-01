@@ -1,0 +1,14 @@
+services:
+    fixturama.faker.generator:
+        class: Faker\Generator
+
+    fixturama.yaml.parser:
+        class: Symfony\Component\Yaml\Parser
+
+    fixturama.generator:
+        class: Naldz\Bundle\FixturamaBundle\Fixturama\FixtureGenerator
+        arguments: [%fixturama.model_definition%, @fixturama.model_fixture_generator]
+
+    fixturama.model_fixture_generator:
+        class: Naldz\Bundle\FixturamaBundle\Fixturama\ModelFixtureGenerator
+        arguments: [@fixturama.faker.generator]

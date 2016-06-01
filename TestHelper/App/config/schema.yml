@@ -1,0 +1,12 @@
+schema:
+    database: test_db
+    models:
+        blog: 
+            fields:
+                id: { type: numberBetween, params: [0, 99999] }
+                title: { type: sentence, params: [10, true] }
+                content: { type: sentence }
+        author: 
+            fields:
+                id: { type: numberBetween, params: [0, 99999] }
+                name: { type: name }
