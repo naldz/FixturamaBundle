@@ -1,7 +1,6 @@
 {
     "name": "naldz/fixturama-bundle",
     "description": "A Symfony2 bundle for managing fixtures",
-    "type": "Symfomy2 Bundle",
     "license": "GNU",
     "authors": [
         {
