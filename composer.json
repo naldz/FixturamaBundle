@@ -11,7 +11,7 @@
     "require": {
         "php": ">=5.3.0",
         "symfony/framework-bundle": "~2.1",
-        "symfony/expression-language": "^3.1",
+        "symfony/expression-language": "~2.7",
         "fzaninotto/faker": "~1.6",
         "naldz/dsn-parser-bundle": "~1.0"
         
