@@ -15,6 +15,7 @@ class FunctionalTest extends \PHPUnit_Framework_TestCase
     protected $commandExecutor;
     protected $env;
     protected $patchDir;
+    protected $pdo;
 
     public function setUp()
     {
@@ -26,13 +27,14 @@ class FunctionalTest extends \PHPUnit_Framework_TestCase
         $this->fs = new FileSystem();
         $this->fs->remove(array($this->appRoot.'/cache', $this->appRoot.'/logs'));
 
-        $pdo = $this->kernel->getContainer()->get('fixturama.pdo');
+        $this->pdo = $this->kernel->getContainer()->get('fixturama.pdo');
 
         //DROP the test database
-        $pdo->exec('DROP DATABASE IF EXISTS `fixturama`');
+        $this->pdo->exec('DROP DATABASE IF EXISTS `fixturama`');
+
         //create the database
-        $pdo->exec('CREATE DATABASE `fixturama`');
-        $pdo->exec('CREATE TABLE `fixturama`.`table1` (
+        $this->pdo->exec('CREATE DATABASE `fixturama`');
+        $this->pdo->exec('CREATE TABLE `fixturama`.`table1` (
             `field1` int(5) unsigned NOT NULL AUTO_INCREMENT,
             `field2` varchar(100) NOT NULL,
             PRIMARY KEY (`field1`)
@@ -49,6 +51,13 @@ class FunctionalTest extends \PHPUnit_Framework_TestCase
                 array('field2' => 'This is a preset text.')
             )
         ));
+
+        //check that the fixture data was inserted in database
+        $stmt = $this->pdo->query('SELECT * FROM `fixturama`.`table1`;');
+        $dataset = $stmt->fetchAll();
+        $this->assertEquals(2, count($dataset));
+        $this->assertEquals(101, $dataset[0]['field1']);
+        $this->assertEquals('This is a preset text.', $dataset[1]['field2']);
     }
 
 }
