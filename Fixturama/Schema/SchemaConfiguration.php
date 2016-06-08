@@ -1,6 +1,6 @@
 <?php 
 
-namespace Naldz\Bundle\FixturamaBundle\Fixturama;
+namespace Naldz\Bundle\FixturamaBundle\Fixturama\Schema;
 
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;

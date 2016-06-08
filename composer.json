@@ -11,12 +11,16 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "symfony/framework-bundle": "~2.1",
-        "fzaninotto/faker": "~1.6"
+        "symfony/framework-bundle": "~2.4",
+        "symfony/expression-language": "^3.1",
+        "fzaninotto/faker": "~1.6",
+        "naldz/dsn-parser-bundle": "~1.0"
+        
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
-        "symfony/console": "2.4.*"
+        "symfony/console": "2.4.*",
+        "naldz/test-utility-bundle": "^1.0"
     },
     "autoload": {
         "psr-0": { "Naldz\\Bundle\\FixturamaBundle": "" }

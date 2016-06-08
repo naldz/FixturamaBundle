@@ -7,7 +7,6 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Naldz\Bundle\FixturamaBundle\TestHelper\App\AppKernel;
 
-
 class IntegrationTest extends \PHPUnit_Framework_TestCase
 {
     protected $appRoot;
@@ -20,7 +19,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->kernel = new AppKernel($this->env, true);
-        $this->appRoot = __DIR__.'/../../../TestHelper/App';
+        $this->appRoot = __DIR__.'/../../TestHelper/App';
         //boot the kernel
         $this->kernel->boot();
 
@@ -37,6 +36,12 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($container->get('fixturama.yaml.parser'));
         $this->assertNotNull($container->get('fixturama.generator'));
         $this->assertNotNull($container->get('fixturama.model_fixture_generator'));
+        $this->assertNotNull($container->get('fixturama.schema_definition'));
+        $this->assertNotNull($container->get('fixturama.pdo'));
+        $this->assertNotNull($container->get('fixturama.sql_converter'));
+        $this->assertNotNull($container->get('fixturama.loader'));
+        $this->assertNotNull($container->get('fixturama.manager'));
+        
     }
 
     public function testModelDefinitionParameterIsDefinedInContainer()

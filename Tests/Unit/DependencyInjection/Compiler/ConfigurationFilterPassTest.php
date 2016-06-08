@@ -212,7 +212,7 @@ class ConfigurationFilterPassTest extends \PHPUnit_Framework_TestCase
 
     private function createSchemaConfigurationMock()
     {
-        return $this->getMock('Naldz\Bundle\FixturamaBundle\Fixturama\SchemaConfiguration');
+        return $this->getMock('Naldz\Bundle\FixturamaBundle\Fixturama\Schema\SchemaConfiguration');
     }
 
     private function createProcessorMock($schemaConfiguration, $configArray, $exception = null)

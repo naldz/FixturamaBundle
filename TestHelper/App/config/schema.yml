@@ -1,12 +1,7 @@
 schema:
-    database: test_db
+    database: fixturama
     models:
-        blog: 
+        fixturama.table1: 
             fields:
-                id: { type: numberBetween, params: [0, 99999] }
-                title: { type: sentence, params: [10, true] }
-                content: { type: sentence }
-        author: 
-            fields:
-                id: { type: numberBetween, params: [0, 99999] }
-                name: { type: name }
+                field1: { type: numberBetween, params: [0, 99999] }
+                field2: { type: words, params: [3, true] }

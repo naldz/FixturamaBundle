@@ -10,7 +10,7 @@ use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Yaml\Parser as YamlParser;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use Naldz\Bundle\FixturamaBundle\Fixturama\SchemaConfiguration;
+use Naldz\Bundle\FixturamaBundle\Fixturama\Schema\SchemaConfiguration;
 
 class ConfigurationFilterPass implements CompilerPassInterface
 {

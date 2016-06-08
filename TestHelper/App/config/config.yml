@@ -19,5 +19,5 @@ framework:
 
 #fixturama configuration
 fixturama:
-    dsn: "mysql:blah"
+    dsn: "mysql://root:password@localhost"
     schema: "%kernel.root_dir%/config/schema.yml"

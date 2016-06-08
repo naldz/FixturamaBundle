@@ -13,25 +13,25 @@ class ModelFixtureGenerator
         $this->faker = $faker;
     }
 
-    public function generate($definition, $dataPresets = array())
+    public function generate($rawModelDefinition, $dataPresets = array())
     {
         //if a field in the dataPresets is unknown, throw an error
-        $unknownFields = array_diff(array_keys($dataPresets), array_keys($definition['fields']));
+        $unknownFields = array_diff(array_keys($dataPresets), array_keys($rawModelDefinition['fields']));
         if (count($unknownFields)) {
             throw new UnknownModelFieldException(sprintf('Unknown FixtureModelField names: %s', implode(', ', $unknownFields)));
         }
 
-        $fieldDefinitions = $definition['fields'];
+        $rawFieldDefinitions = $rawModelDefinition['fields'];
         $data = array();
 
-        foreach ($fieldDefinitions as $fieldName => $fieldDefinition) {
+        foreach ($rawFieldDefinitions as $fieldName => $rawFieldDefinition) {
             if (isset($dataPresets[$fieldName])) {
                 $data[$fieldName] = $dataPresets[$fieldName];
             }
             else {
-                $type = $fieldDefinition['type'];
-                if (array_key_exists('params', $fieldDefinition)) {
-                    $data[$fieldName] = call_user_func_array(array($this->faker, $type), $fieldDefinition['params']);
+                $type = $rawFieldDefinition['type'];
+                if (array_key_exists('params', $rawFieldDefinition)) {
+                    $data[$fieldName] = call_user_func_array(array($this->faker, $type), $rawFieldDefinition['params']);
                 }
                 else {
                     $data[$fieldName] = $this->faker->$type;

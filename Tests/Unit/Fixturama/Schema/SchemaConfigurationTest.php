@@ -4,7 +4,7 @@ namespace Naldz\Bundle\FixturamaBundle\Tests\Unit\Fixturama;
 
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Config\Definition\Processor;
-use Naldz\Bundle\FixturamaBundle\Fixturama\SchemaConfiguration;
+use Naldz\Bundle\FixturamaBundle\Fixturama\Schema\SchemaConfiguration;
 
 
 class SchemaConfigurationTest extends \PHPUnit_Framework_TestCase

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7c903a4f189f8eab7d0cf02336fc67f4",
-    "content-hash": "abcfc9eb1297b7e893a6444d46b00e6a",
+    "hash": "15df468ba48570c43810a8d51ee20f39",
+    "content-hash": "11cd0a0370fa123cb362b1d5757b65fa",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -246,6 +246,76 @@
                 "fixtures"
             ],
             "time": "2016-04-29 12:21:54"
+        },
+        {
+            "name": "naldz/dsn-parser-bundle",
+            "version": "v1.0",
+            "target-dir": "Naldz/Bundle/DsnParserBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/naldz/DsnParserBundle.git",
+                "reference": "97dd1562f62b812d98f31f4c55c816e5f074edf9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/naldz/DsnParserBundle/zipball/97dd1562f62b812d98f31f4c55c816e5f074edf9",
+                "reference": "97dd1562f62b812d98f31f4c55c816e5f074edf9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "symfony/framework-bundle": "~2.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*",
+                "symfony/console": "2.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Naldz\\Bundle\\DsnParserBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Reynaldo Castellano III",
+                    "email": "reynaldocastellano@gmail.com"
+                }
+            ],
+            "description": "Symfony2 Bundle for parsing Datasource strings.",
+            "time": "2016-06-07 12:05:18"
+        },
+        {
+            "name": "naldz/test-utility-bundle",
+            "version": "v1.0.1",
+            "target-dir": "Naldz/Bundle/TestUtilityBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/naldz/TestUtilityBundle.git",
+                "reference": "e23edea7086417aea88c50750036b459e0949968"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/naldz/TestUtilityBundle/zipball/e23edea7086417aea88c50750036b459e0949968",
+                "reference": "e23edea7086417aea88c50750036b459e0949968",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "symfony/framework-bundle": "~2.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Naldz\\Bundle\\TestUtilityBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2014-03-04 06:25:47"
         },
         {
             "name": "paragonie/random_compat",
@@ -676,6 +746,55 @@
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
             "time": "2016-05-05 06:56:13"
+        },
+        {
+            "name": "symfony/expression-language",
+            "version": "v3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/expression-language.git",
+                "reference": "9db6f176064fbd3f5ced4865be60b335b6a12723"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/expression-language/zipball/9db6f176064fbd3f5ced4865be60b335b6a12723",
+                "reference": "9db6f176064fbd3f5ced4865be60b335b6a12723",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\ExpressionLanguage\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony ExpressionLanguage Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-03-10 11:16:56"
         },
         {
             "name": "symfony/filesystem",
