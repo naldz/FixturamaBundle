@@ -1,3 +1,6 @@
+imports:
+    - { resource: parameters.yml }
+
 parameters:
     locale: en
     secret: ThisTokenIsNotSoSecretChangeIt
@@ -20,4 +23,4 @@ framework:
 #fixturama configuration
 fixturama:
     dsn: "mysql://root:password@localhost"
-    schema: "%kernel.root_dir%/config/schema.yml"
+    schema_file: "%kernel.root_dir%/config/schema.yml"

@@ -21,7 +21,6 @@ class SchemaConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $schema = Yaml::parse("
 schema:
-    database: Autodeal
     models:
         blog: 
             fields:
@@ -50,24 +49,10 @@ schema:
         return array(
             array("
 schema:
-    models:
+    models_error:
         blog: 
             fields:
                 id: { type: numberBetween, params: [0, 99999] }
-                title: { type: sentence, params: [10, true] }
-                content: { type: sentence }
-            "),
-            array("
-schema:
-    database: Autodeal
-            "),
-            array("
-schema:
-    database: Autodeal
-    models:
-        blog: 
-            fields:
-                id: { params: [0, 99999] }
                 title: { type: sentence, params: [10, true] }
                 content: { type: sentence }
             ")

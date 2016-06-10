@@ -1,7 +1,6 @@
 schema:
-    database: fixturama
     models:
-        fixturama.table1: 
+        %database_name%.table1: 
             fields:
                 field1: { type: numberBetween, params: [0, 99999] }
                 field2: { type: words, params: [3, true] }

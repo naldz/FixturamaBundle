@@ -13,10 +13,6 @@ class SchemaConfiguration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('schema');
         $rootNode
             ->children()
-                ->scalarNode('database')
-                    ->isRequired()
-                    ->cannotBeEmpty()
-                ->end()
                 ->arrayNode('models')
                     ->isRequired()
                     ->prototype('array')

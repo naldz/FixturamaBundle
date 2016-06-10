@@ -19,7 +19,7 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->cannotBeEmpty()
                 ->end()
-                ->scalarNode('schema')
+                ->scalarNode('schema_file')
                     ->isRequired()
                     ->cannotBeEmpty()
                 ->end()

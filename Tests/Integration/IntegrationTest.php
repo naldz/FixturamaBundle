@@ -41,12 +41,19 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($container->get('fixturama.sql_converter'));
         $this->assertNotNull($container->get('fixturama.loader'));
         $this->assertNotNull($container->get('fixturama.manager'));
-        
     }
 
     public function testModelDefinitionParameterIsDefinedInContainer()
     {
         $container = $this->kernel->getContainer();
         $this->assertNotNull($container->getParameter('fixturama.model_definition', null));
+    }
+
+    public function testParameterValuesInSchemaConfigAreResolved()
+    {
+        //the schema.yml file contains %database_name% variable whish is defined in parameters.yml
+        $container = $this->kernel->getContainer();
+        $schemaDefinition = $container->getParameter('fixturama.model_definition');
+        $this->assertTrue(isset($schemaDefinition['models']['fixturama.table1']));
     }
 }

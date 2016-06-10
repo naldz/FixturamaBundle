@@ -8,6 +8,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\Config\FileLocator;
+use Naldz\Bundle\FixturamaBundle\Fixturama\Schema\SchemaConfiguration;
+use Symfony\Component\Yaml\Yaml;
 
 class FixturamaExtension extends Extension
 {
@@ -25,14 +27,19 @@ class FixturamaExtension extends Extension
             $processor = new Processor();
         }
         
-        $config = $processor->processConfiguration($configuration, $configs);
+        $configOptions = $processor->processConfiguration($configuration, $configs);
+        $container->setParameter('fixturama.dsn', $configOptions['dsn']);
+        $container->setParameter('fixturama.schema_file', $configOptions['schema_file']);
 
-        $container->setParameter('fixturama.dsn', $config['dsn']);
-        $container->setParameter('fixturama.schema', $config['schema']);
+        //process the schema_file configuration
+        $schemaConfiguration = new SchemaConfiguration();
+        $schemaFileContent = Yaml::parse(file_get_contents($configOptions['schema_file']));
+        $schemaConfigOptions = $processor->processConfiguration($schemaConfiguration, $schemaFileContent);
+
+        $container->setParameter('fixturama.model_definition', $schemaConfigOptions);
 
         //load the services
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
-
     }
 }
