@@ -19,7 +19,14 @@ class SqlConverter
 
     public function convert($tableName, $dataset)
     {
-        $rawModelDefinition = $this->schemaDefinition->getModelDefinition($tableName);
+        $keys = explode('.', $tableName);
+        if (count($keys) != 2) {
+            throw new InvalidDatabaseAndModelNameCombinationException(sprintf('The database and model name combination "%s" is not valid. It should be in the format "database.model"', $tableName));
+        }
+        $databaseName = $keys[0];
+        $modelName = $keys[1];
+
+        $rawModelDefinition = $this->schemaDefinition->getModelDefinition($databaseName, $modelName);
         $fieldNames = array_keys($rawModelDefinition['fields']);
 
         $sqlInsertValues = array();

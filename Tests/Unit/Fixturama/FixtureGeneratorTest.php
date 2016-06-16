@@ -8,6 +8,18 @@ use Naldz\Bundle\FixturamaBundle\Fixturama\Exception\UnknownModelFieldException;
 
 class FixtureGeneratorTest extends \PHPUnit_Framework_TestCase
 {
+    public function testInvalidDatabaseAndModelNameCombinationThrowsException()
+    {
+        $this->setExpectedException('Naldz\Bundle\FixturamaBundle\Fixturama\Exception\InvalidDatabaseAndModelNameCombinationException');
+        $schemaDefinitionMock = $this->createSchemaDefinitionMock();
+        $modelFixtureGeneratorMock = $this->createModelFixtureGeneratorMock();
+
+        $sut = new FixtureGenerator($schemaDefinitionMock, $modelFixtureGeneratorMock);
+        $sut->generate(array(
+            'table1' => array()
+        ));
+    }
+
     public function testGettingOfUnknownModelThrowsException()
     {
         $this->setExpectedException('Naldz\Bundle\FixturamaBundle\Fixturama\Exception\UnknownModelException');
@@ -18,7 +30,7 @@ class FixtureGeneratorTest extends \PHPUnit_Framework_TestCase
         $sut = new FixtureGenerator($schemaDefinitionMock, $modelFixtureGeneratorMock);
 
         $fixtureModel = $sut->generate(array(
-            'blog_author' => array(
+            'db1.blog_author' => array(
                 array('id' => '1')
             )
         ));
@@ -47,7 +59,7 @@ class FixtureGeneratorTest extends \PHPUnit_Framework_TestCase
         $sut = new FixtureGenerator($schemaDefinitionMock, $modelFixtureGeneratorMock);
 
         $fixtureModel = $sut->generate(array(
-            'blog_author' => array(array('unknown_field1' => 1, 'unknown_field2' => 2))
+            'db1.blog_author' => array(array('unknown_field1' => 1, 'unknown_field2' => 2))
         ));
     }
 
@@ -93,22 +105,22 @@ class FixtureGeneratorTest extends \PHPUnit_Framework_TestCase
         ));
         $sut = new FixtureGenerator($schemaDefinitionMock, $modelFixtureGeneratorMock);
         $actualFixtureData = $sut->generate(array(
-            'blog_author' => array(
+            'db1.blog_author' => array(
                 array('id' => 1), 
                 array('id' => 2)
             ),
-            'blog_post' => array(
+            'db1.blog_post' => array(
                 array('id' => 1, 'blog_author_id' => 1),
                 array('id' => 2, 'blog_author_id' => 2)
             ),
         ));
 
         $expectedFixtureData = array(
-            'blog_author' => array(
+            'db1.blog_author' => array(
                 array('id' => 1, 'name' => 'Author One'),
                 array('id' => 2, 'name' => 'Author Two')
             ),
-            'blog_post' => array(
+            'db1.blog_post' => array(
                 array('id' => 1, 'blog_author_id' => 1, 'title' => 'Post 1', 'tag' => 'tag_one'),
                 array('id' => 2, 'blog_author_id' => 2, 'title' => 'Post 2', 'tag' => 'tag_two')
             )
@@ -125,7 +137,7 @@ class FixtureGeneratorTest extends \PHPUnit_Framework_TestCase
         $mock->expects($this->any())
             ->method('getModelDefinition')
             ->will($this->returnCallback(
-                function($modelName) use ($data) {
+                function($databaseName, $modelName) use ($data) {
                     if (array_key_exists($modelName, $data)) {
                         if ($data[$modelName] instanceof \Exception) {
                             throw $data[$modelName];

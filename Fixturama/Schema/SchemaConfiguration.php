@@ -13,24 +13,35 @@ class SchemaConfiguration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('schema');
         $rootNode
             ->children()
-                ->arrayNode('models')
+                ->arrayNode('databases')
                     ->isRequired()
                     ->prototype('array')
                         ->children()
-                            ->arrayNode('fields')
+                            ->scalarNode('dsn')
+                            ->end()
+                            ->arrayNode('models')
+                                ->isRequired()
                                 ->prototype('array')
                                     ->children()
-                                        ->scalarNode('type')
-                                            ->isRequired()
-                                            ->cannotBeEmpty()
-                                        ->end()
-                                        ->variableNode('params')
+                                        ->arrayNode('fields')
+                                            ->prototype('array')
+                                                ->children()
+                                                    ->scalarNode('type')
+                                                        ->isRequired()
+                                                        ->cannotBeEmpty()
+                                                    ->end()
+                                                    ->variableNode('params')
+                                                    ->end()
+                                                ->end()
+                                            ->end()
                                         ->end()
                                     ->end()
                                 ->end()
+                            ->end()
                         ->end()
                     ->end()
-                ->end();
+                ->end()
+            ->end();
 
         return $treeBuilder;
     }

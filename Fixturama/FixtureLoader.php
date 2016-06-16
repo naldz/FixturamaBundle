@@ -23,7 +23,8 @@ class FixtureLoader
     public function load($fixtureData)
     {
         //if a model in the data presets is unknown, throw an exception
-        $unknownModels = array_diff(array_keys($fixtureData), $this->definition->getModelNames());
+        $unknownModels = array_diff(array_keys($fixtureData), $this->definition->getModelNames(null, true));
+
         if (count($unknownModels)) {
             throw new UnknownModelException(sprintf('Unknown FixtureModel names: %s', implode(', ', $unknownModels)));
         }

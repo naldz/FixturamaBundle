@@ -21,12 +21,15 @@ class SchemaConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $schema = Yaml::parse("
 schema:
-    models:
-        blog: 
-            fields:
-                id: { type: numberBetween, params: [0, 99999] }
-                title: { type: sentence, params: [10, true] }
-                content: { type: sentence }
+    databases:
+        db1:
+            dsn: test_dsn
+            models:
+                blog: 
+                    fields:
+                        id: { type: numberBetween, params: [0, 99999] }
+                        title: { type: sentence, params: [10, true] }
+                        content: { type: sentence }
 ");
         $processor = new Processor();
         $processedConfig = $processor->processConfiguration($this->configuration, $schema);

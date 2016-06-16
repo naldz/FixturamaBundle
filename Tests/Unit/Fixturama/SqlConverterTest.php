@@ -71,12 +71,13 @@ class SqlConverterTest extends \PHPUnit_Framework_TestCase
         $mock->expects($this->any())
             ->method('getModelDefinition')
             ->will($this->returnCallback(
-                function($modelName) use ($data) {
-                    if (array_key_exists($modelName, $data)) {
-                        if ($data[$modelName] instanceof \Exception) {
-                            throw $data[$modelName];
+                function($dbName, $modelName) use ($data) {
+                    $key = $dbName.'.'.$modelName;
+                    if (array_key_exists($key, $data)) {
+                        if ($data[$key] instanceof \Exception) {
+                            throw $data[$key];
                         }
-                        return $data[$modelName];
+                        return $data[$key];
                     }
                 }
             ));

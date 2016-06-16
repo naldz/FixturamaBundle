@@ -2,6 +2,7 @@ services:
     fixturama.faker.generator:
         class: Faker\Generator
         factory: ['Faker\Factory', 'create']
+        arguments: ['en_PH']
 
     fixturama.yaml.parser:
         class: Symfony\Component\Yaml\Parser
@@ -33,3 +34,6 @@ services:
     fixturama.manager:
         class: Naldz\Bundle\FixturamaBundle\Fixturama\Fixturama
         arguments: [@fixturama.generator, @fixturama.loader]
+
+    fixturama.orm.propel.converter:
+        class: Naldz\Bundle\FixturamaBundle\Fixturama\Schema\OrmSchemaConverter
