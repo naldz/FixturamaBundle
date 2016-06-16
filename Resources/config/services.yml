@@ -1,8 +1,8 @@
 services:
-    fixturama.faker.generator:
-        class: Faker\Generator
-        factory: ['Faker\Factory', 'create']
-        arguments: ['en_PH']
+    # fixturama.faker.generator:
+    #     class: Faker\Generator
+    #     factory: ['Faker\Factory', 'create']
+    #     arguments: ['en_PH']
 
     fixturama.yaml.parser:
         class: Symfony\Component\Yaml\Parser
@@ -17,7 +17,7 @@ services:
 
     fixturama.model_fixture_generator:
         class: Naldz\Bundle\FixturamaBundle\Fixturama\ModelFixtureGenerator
-        arguments: [@fixturama.faker.generator]
+        arguments: [@faker.generator]
 
     fixturama.schema_definition:
         class: Naldz\Bundle\FixturamaBundle\Fixturama\Schema\SchemaDefinition

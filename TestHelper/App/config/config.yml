@@ -24,3 +24,6 @@ framework:
 fixturama:
     dsn: "mysql://root:password@localhost"
     schema_file: "%kernel.root_dir%/config/schema.yml"
+
+bazinga_faker:
+    locale:     en_PH

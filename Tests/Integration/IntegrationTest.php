@@ -32,7 +32,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function testServicesAreDefined()
     {
         $container = $this->kernel->getContainer();
-        $this->assertNotNull($container->get('fixturama.faker.generator'));
+        $this->assertNotNull($container->get('faker.generator'));
         $this->assertNotNull($container->get('fixturama.yaml.parser'));
         $this->assertNotNull($container->get('fixturama.generator'));
         $this->assertNotNull($container->get('fixturama.model_fixture_generator'));

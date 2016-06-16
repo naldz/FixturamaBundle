@@ -11,6 +11,7 @@ class AppKernel extends Kernel
     {
         $bundles = array(
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new \Bazinga\Bundle\FakerBundle\BazingaFakerBundle(),
             new \Naldz\Bundle\FixturamaBundle\FixturamaBundle(),
             new \Naldz\Bundle\DsnParserBundle\DsnParserBundle(),
         );
