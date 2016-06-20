@@ -2,33 +2,15 @@
 
 namespace Naldz\Bundle\FixturamaBundle\Tests\Functional;
 
-use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
-use Naldz\Bundle\FixturamaBundle\TestHelper\App\AppKernel;
+use Naldz\Bundle\FixturamaBundle\Tests\Functional\FunctionalTestCase;
 
-class FunctionalTest extends \PHPUnit_Framework_TestCase
+class FunctionalTest extends FunctionalTestCase
 {
-    protected $appRoot;
-    protected $kernel;
-    protected $application;
-    protected $commandExecutor;
-    protected $env;
-    protected $patchDir;
-    protected $pdo;
-
     public function setUp()
     {
-        $this->kernel = new AppKernel($this->env, true);
-        $this->appRoot = __DIR__.'/../../TestHelper/App';
-        //boot the kernel
-        $this->kernel->boot();
-        //remove the cache files from the app
-        $this->fs = new FileSystem();
-        $this->fs->remove(array($this->appRoot.'/cache', $this->appRoot.'/logs'));
+        parent::setUp();
 
         $this->pdo = $this->kernel->getContainer()->get('fixturama.pdo');
-
         //DROP the test database
         $this->pdo->exec('DROP DATABASE IF EXISTS `fixturama`');
 
@@ -46,14 +28,14 @@ class FunctionalTest extends \PHPUnit_Framework_TestCase
         $container = $this->kernel->getContainer();
         $fixturama = $container->get('fixturama.manager');
         $fixturama->setUp(array(
-            'fixturama.table1' => array(
+            'fixturama1.table1' => array(
                 array('field1' => 101),
                 array('field2' => 'This is a preset text.')
             )
         ));
 
         //check that the fixture data was inserted in database
-        $stmt = $this->pdo->query('SELECT * FROM `fixturama`.`table1`;');
+        $stmt = $this->pdo->query('SELECT * FROM `fixturama1`.`table1`;');
         $dataset = $stmt->fetchAll();
         $this->assertEquals(2, count($dataset));
         $this->assertEquals(101, $dataset[0]['field1']);

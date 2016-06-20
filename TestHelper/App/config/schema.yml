@@ -1,9 +1,24 @@
 schema:
     databases:
-        %database_name%:
+        %database_name1%:
             dsn: 
             models: 
                 table1: 
+                    fields:
+                        field1: { type: numberBetween, params: [0, 99999] }
+                        field2: { type: words, params: [3, true] }
+                table2: 
+                    fields:
+                        field1: { type: numberBetween, params: [0, 99999] }
+                        field2: { type: words, params: [3, true] }
+        %database_name2%:
+            dsn: 
+            models: 
+                table1: 
+                    fields:
+                        field1: { type: numberBetween, params: [0, 99999] }
+                        field2: { type: words, params: [3, true] }
+                table2: 
                     fields:
                         field1: { type: numberBetween, params: [0, 99999] }
                         field2: { type: words, params: [3, true] }

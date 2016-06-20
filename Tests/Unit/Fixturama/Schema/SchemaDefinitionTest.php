@@ -113,4 +113,11 @@ class SchemaDefinitionTest extends \PHPUnit_Framework_TestCase
         $expectedModelNames = array('db1.tb1','db2.tb1');
         $this->assertEquals($expectedModelNames, $actualModelNames);
     }
+
+    public function testGettingOfModelFieldNames()
+    {
+        $actualModelFieldNames = $this->schemaDefinition->getModelFieldNames('db1', 'tb1');
+        $expectedModelFieldNames = array('field1', 'field2');
+        $this->assertEquals($expectedModelFieldNames, $actualModelFieldNames);
+    }
 }

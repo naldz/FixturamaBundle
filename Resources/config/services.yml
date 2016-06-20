@@ -35,5 +35,9 @@ services:
         class: Naldz\Bundle\FixturamaBundle\Fixturama\Fixturama
         arguments: [@fixturama.generator, @fixturama.loader]
 
-    fixturama.orm.propel.converter:
+    fixturama.orm.converter:
         class: Naldz\Bundle\FixturamaBundle\Fixturama\Schema\OrmSchemaConverter
+
+    fixturama.schema_comparator:
+        class: Naldz\Bundle\FixturamaBundle\Fixturama\Schema\SchemaComparator
+        arguments: [@fixturama.schema_definition]

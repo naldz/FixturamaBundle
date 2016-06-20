@@ -1,2 +1,3 @@
 parameters:
-    database_name: fixturama
+    database_name1: fixturama1
+    database_name2: fixturama2

@@ -54,6 +54,6 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         //the schema.yml file contains %database_name% variable whish is defined in parameters.yml
         $container = $this->kernel->getContainer();
         $schemaDefinition = $container->getParameter('fixturama.model_definition');
-        $this->assertTrue(isset($schemaDefinition['databases']['fixturama']['models']['table1']));
+        $this->assertTrue(isset($schemaDefinition['databases']['fixturama1']['models']['table1']));
     }
 }

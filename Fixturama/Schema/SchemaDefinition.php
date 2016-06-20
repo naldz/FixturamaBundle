@@ -82,8 +82,13 @@ class SchemaDefinition
                 $modelNames[] = $dbName.'.'.$modelName;
             }
         }
-
         return $modelNames;
+    }
+
+    public function getModelFieldNames($databaseName, $modelName)
+    {
+        $modelDefinition = $this->getModelDefinition($databaseName, $modelName);
+        return array_keys($modelDefinition['fields']);
     }
 
 }
