@@ -26,12 +26,12 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         //remove the cache files from the app
         $this->fs = new FileSystem();
         $this->fs->remove(array($this->appRoot.'/cache', $this->appRoot.'/logs'));
-
     }
 
     public function testServicesAreDefined()
     {
         $container = $this->kernel->getContainer();
+
         $this->assertNotNull($container->get('faker.generator'));
         $this->assertNotNull($container->get('fixturama.yaml.parser'));
         $this->assertNotNull($container->get('fixturama.generator'));

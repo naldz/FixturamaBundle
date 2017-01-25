@@ -5,6 +5,7 @@ namespace Naldz\Bundle\FixturamaBundle\Fixturama;
 use Naldz\Bundle\FixturamaBundle\Fixturama\ModelFixtureGenerator;
 use Naldz\Bundle\FixturamaBundle\Fixturama\Schema\SchemaDefinition;
 use Naldz\Bundle\FixturamaBundle\Fixturama\Exception\UnknownModelException;
+use Naldz\Bundle\FixturamaBundle\Fixturama\Exception\UnknownModelFieldException;
 use Naldz\Bundle\FixturamaBundle\Fixturama\Exception\InvalidDatabaseAndModelNameCombinationException;
 
 class FixtureGenerator
@@ -33,7 +34,13 @@ class FixtureGenerator
             $rawModelDefinition = $this->schemaDefinition->getModelDefinition($databaseName, $modelName);
             $fixtureData[$key] = array();
             foreach ($modelPresetDataCollection as $modelPresetData) {
-                $fixtureData[$key][] = $this->modelFixtureGenerator->generate($rawModelDefinition, $modelPresetData);
+                try {
+                    $fixtureData[$key][] = $this->modelFixtureGenerator->generate($rawModelDefinition, $modelPresetData);
+                }
+                catch (UnknownModelFieldException $e) {
+                    $errorMessage = $e->getMessage().' in model: '.$key;
+                    throw new UnknownModelFieldException($errorMessage);
+                }
             }
         }
 

@@ -13,7 +13,7 @@ services:
 
     fixturama.generator:
         class: Naldz\Bundle\FixturamaBundle\Fixturama\FixtureGenerator
-        arguments: [@fixturama.schema_definition, @fixturama.model_fixture_generator]
+        arguments: [@fixturama.schema_definition, @fixturama.model_fixture_generator, @event_dispatcher]
 
     fixturama.model_fixture_generator:
         class: Naldz\Bundle\FixturamaBundle\Fixturama\ModelFixtureGenerator
@@ -29,7 +29,7 @@ services:
 
     fixturama.loader:
         class: Naldz\Bundle\FixturamaBundle\Fixturama\FixtureLoader
-        arguments: [@fixturama.schema_definition, @fixturama.sql_converter, @fixturama.pdo]
+        arguments: [@fixturama.schema_definition, @fixturama.sql_converter, @fixturama.pdo, @event_dispatcher]
 
     fixturama.manager:
         class: Naldz\Bundle\FixturamaBundle\Fixturama\Fixturama

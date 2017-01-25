@@ -25,7 +25,7 @@ class SqlConverterTest extends \PHPUnit_Framework_TestCase
         ));
     }
 
-    public function testSuccessfulConversion()
+    public function testSuccessfullConversion()
     {
         $pdoMock = $this->createPdoMock(array(
             '1'             => "'1'",
@@ -33,7 +33,7 @@ class SqlConverterTest extends \PHPUnit_Framework_TestCase
             '2'             => "'2'",
             'field2_2 value'=> "'field2_2 value'"
         ));
-        
+
         $data = array(
             array('id' => '1', 'title' => 'field1_2 value'),
             array('id' => '2', 'title' => 'field2_2 value')
@@ -42,6 +42,33 @@ class SqlConverterTest extends \PHPUnit_Framework_TestCase
         $sqlConverter = new SqlConverter($this->schemaDefinitionMock, $pdoMock);
         $actualSql = $sqlConverter->convert('database.blog_post', $data);
         $expectedSql = "INSERT INTO database.blog_post (`id`,`title`) VALUES ('1','field1_2 value'),('2','field2_2 value');";
+        $this->assertEquals($actualSql, $expectedSql);
+    }
+
+    public function testConvertRowWithUnknownFieldThrowsException()
+    {
+        $this->setExpectedException('Naldz\Bundle\FixturamaBundle\Fixturama\Exception\IncompleteDatasetException');
+        $pdoMock = $this->createPdoMock(array());
+        $data = array(
+            'unknow_field' => 1,
+            'title' => 'field value'
+        );
+
+        $sqlConverter = new SqlConverter($this->schemaDefinitionMock, $pdoMock);
+        $actualSql = $sqlConverter->convertRow('database.blog_post', $data);
+    }
+
+
+    public function testSuccessRowConversion()
+    {
+        $pdoMock = $this->createPdoMock(array(
+            '1'             => "'1'",
+            'field1 value'=> "'field1 value'",
+        ));
+        $data = array('id' => '1', 'title' => 'field1 value');
+        $sqlConverter = new SqlConverter($this->schemaDefinitionMock, $pdoMock);
+        $actualSql = $sqlConverter->convertRow('database.blog_post', $data);
+        $expectedSql = "INSERT INTO database.blog_post (`id`,`title`) VALUES ('1','field1 value');";
         $this->assertEquals($actualSql, $expectedSql);
     }
 
